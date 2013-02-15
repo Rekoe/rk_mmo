@@ -8,6 +8,7 @@ public class Server {
 	/**
 	 * @param args
 	 *            http://javaxyq.googlecode.com/svn/trunk/
+	 *            https://github.com/Rekoe/rk_mmo.git
 	 */
 	public static void main(String[] args) {
 		FilterGameConfig config = new FilterGameConfig();
