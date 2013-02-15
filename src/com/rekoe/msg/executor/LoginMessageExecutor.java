@@ -22,6 +22,7 @@ public class LoginMessageExecutor extends BaseStateMessageExecutor<Client> {
 	@Override
 	protected void executeFirstStep(IMessage<Client> msg) {
 		CSLoginMessage login = (CSLoginMessage) msg;
+		//Client client = msg.getSender();
 		//UserDataService usreService = GameMvcs.getIoc().get(UserDataService.class);
 		//log.info(" userService "+usreService);
 		//login.getSender().setMessageState(MessageTypeState.LOADING);
