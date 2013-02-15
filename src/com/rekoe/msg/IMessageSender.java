@@ -1,5 +1,7 @@
 package com.rekoe.msg;
 
+import com.rekoe.model.gameobjects.client.Client;
+
 
 
 /**
@@ -9,5 +11,5 @@ public interface IMessageSender {
 	
 	public short getMessageState();
 	public void setMessageState(short value);
-	public void write(IMessage<?> message);
+	public void write(IMessage<Client> message);
 }

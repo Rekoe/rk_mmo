@@ -3,7 +3,6 @@ package com.rekoe.msg;
 import com.rekoe.model.gameobjects.client.Client;
 import com.rekoe.msg.cs.CSLoginMessage;
 
-
 /**
  *消息注册器
  */
