@@ -19,7 +19,9 @@ import org.nutz.mvc.LoadingException;
 import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.Localization;
 
+import com.rekoe.mvc.IServer;
 import com.rekoe.mvc.annotation.IocGameBy;
+import com.rekoe.mvc.annotation.ServerStartBy;
 
 public class GameLoading implements com.rekoe.mvc.Loading{
 
@@ -60,6 +62,7 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			 * 处理环境设置
 			 */
 			createContext(config);
+			evalMainServerMonitor(config, mainModule);
 		}
 		catch (Exception e) {
 			if (log.isErrorEnabled())
@@ -72,13 +75,30 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 		if (log.isInfoEnabled())
 			log.infof("MMO[%s] is up in %sms", "1.0", sw.getDuration());
 	}
+	
+	private void evalMainServerMonitor(GameConfig config, Class<?> mainModule) throws Exception 
+	{
+		ServerStartBy sb = mainModule.getAnnotation(ServerStartBy.class);
+		if (null != sb) {
+			if (log.isInfoEnabled())
+				log.info("Server Start application...");
+			Class<? extends IServer>[] servers = sb.value();
+			for(Class<? extends IServer> classType:servers)
+			{
+				IServer start = evalObj(config, classType, sb.args());
+				config.setAttributeIgnoreNull(IServer.class.getName(), start);
+				start.initMessageExecutor();
+				start.connect(config);
+			}
+		}
+	}
 	private void createIoc(GameConfig config, Class<?> mainModule) throws Exception {
 		IocGameBy ib = mainModule.getAnnotation(IocGameBy.class);
 		if (null != ib) {
 			if (log.isDebugEnabled())
 				log.debugf("@IocBy(%s)", ib.type().getName());
 			Ioc ioc = Mirror.me(ib.type()).born().create(config, ib.args());
-			log.info(ioc);
+			log.debug(ioc);
 		} else if (log.isInfoEnabled())
 			log.info("!!!Your application without @IocBy supporting");
 	}

@@ -2,7 +2,9 @@ package com.rekoe;
 
 import org.nutz.mvc.annotation.Modules;
 
+import com.rekoe.application.policy.PolicyServer;
 import com.rekoe.mvc.annotation.IocGameBy;
+import com.rekoe.mvc.annotation.ServerStartBy;
 import com.rekoe.mvc.ioc.provider.ComboIocGameProvider;
 
 /**
@@ -15,7 +17,7 @@ import com.rekoe.mvc.ioc.provider.ComboIocGameProvider;
 @IocGameBy(type = ComboIocGameProvider.class, args = {
 		"*org.nutz.ioc.loader.json.JsonLoader", "ioc/",
 		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.rekoe.db" })
-
+@ServerStartBy({PolicyServer.class})
 public class MainModule {
 
 }
