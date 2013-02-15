@@ -7,6 +7,7 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
 import com.rekoe.msg.BaseIoMessage;
+import com.rekoe.msg.cs.CSLoginMessage;
 
 public class SimpleClientHandler extends SimpleChannelUpstreamHandler {
 
@@ -30,13 +31,8 @@ public class SimpleClientHandler extends SimpleChannelUpstreamHandler {
 	public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e)
 			throws Exception {
 		//模拟登录
-		//CSLoginMessage loginMessage = new CSLoginMessage("iwan", "?name=rekoe", (byte)1);
-		//e.getChannel().write(loginMessage);
-		//需要延时 等候10秒
-		//Thread.sleep(3000);
-		//模拟物品移动
-		//CSItemMoveMessage move = new CSItemMoveMessage((short)ItemConstants.ITEM_CONTAINER_TYPE_BAG, (short)0, (short)0, (short)ItemConstants.ITEM_CONTAINER_TYPE_BODY, (short)0, (short)0);
-		//e.getChannel().write(move);
+		CSLoginMessage loginMessage = new CSLoginMessage("iwan", "?name=rekoe", (byte)1);
+		e.getChannel().write(loginMessage);
 	}
 	
 }
