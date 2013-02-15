@@ -1,6 +1,4 @@
-package com.rekoe.test.client.login;
-
-import java.net.InetSocketAddress;
+package com.rekoe.test.client.login;import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 
 import org.jboss.netty.bootstrap.ClientBootstrap;
@@ -28,8 +26,7 @@ public class Login {
 		ClientBootstrap _bootstrap = new ClientBootstrap(
 				new NioClientSocketChannelFactory(
 						Executors.newCachedThreadPool(),
-						Executors.newCachedThreadPool()));
-		
+						Executors.newCachedThreadPool()));		
 		_bootstrap.setPipelineFactory(new SimpleClientPipelineFactory());
 		ChannelFuture _future = _bootstrap.connect(new InetSocketAddress("localhost",8166));
 		_future.getChannel().getCloseFuture().awaitUninterruptibly();

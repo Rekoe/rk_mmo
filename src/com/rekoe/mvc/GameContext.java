@@ -23,7 +23,7 @@ public class GameContext {
 	@SuppressWarnings("unchecked")
 	public String getConfigValue(String name)
 	{
-		Map<String,String> config = ((Map<String,String>)map.get("config"));
+		Map<String,String> config = ((Map<String,String>)map.get(RkMvcContext.GAME_CONFIG_KEY));
 		return config.get(name);
 	}
 }

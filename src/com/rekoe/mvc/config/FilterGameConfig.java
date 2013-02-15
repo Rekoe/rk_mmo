@@ -4,6 +4,7 @@ package com.rekoe.mvc.config;
 import org.nutz.ioc.Ioc;
 
 import com.rekoe.mvc.GameContext;
+import com.rekoe.mvc.RkMvcContext;
 
 
 public class FilterGameConfig extends AbstractGameConfig{
@@ -13,8 +14,7 @@ public class FilterGameConfig extends AbstractGameConfig{
 	public FilterGameConfig()
 	{
 		this.gameContext = new GameContext();
-		//GameMvcs.setMMOContext(mmoContext);
-		//GameMvcs.setNutConfig(this);
+		RkMvcContext.me().setConfig(this);
 	}
 	@Override
 	public GameContext getGameContext() {
@@ -22,7 +22,7 @@ public class FilterGameConfig extends AbstractGameConfig{
 	}
 	@Override
 	public Ioc getIoc() {
-		return null;//GameMvcs.getIoc();
+		return (Ioc)getGameContext().getAttribute(RkMvcContext.GAME_IOC_KEY);
 	}
 
 }

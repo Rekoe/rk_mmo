@@ -20,6 +20,7 @@ import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.Localization;
 
 import com.rekoe.mvc.IServer;
+import com.rekoe.mvc.RkMvcContext;
 import com.rekoe.mvc.annotation.IocGameBy;
 import com.rekoe.mvc.annotation.ServerStartBy;
 
@@ -30,7 +31,7 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 	public void load(GameConfig config) {
 		if (log.isInfoEnabled()) {
 			log.infof("Nutz Version : %s ", Nutz.version());
-			log.infof("Nutz.Mvc[%s] is initializing ...", "");
+			log.infof("Nutz.Mvc is initializing ...", "");
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("Web Container Information:");
@@ -73,7 +74,7 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 		// ~ Done ^_^
 		sw.stop();
 		if (log.isInfoEnabled())
-			log.infof("MMO[%s] is up in %sms", "1.0", sw.getDuration());
+			log.infof("RK_MMO[%s] is up in %sms", "1.0", sw.getDuration());
 	}
 	
 	private void evalMainServerMonitor(GameConfig config, Class<?> mainModule) throws Exception 
@@ -98,7 +99,7 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			if (log.isDebugEnabled())
 				log.debugf("@IocBy(%s)", ib.type().getName());
 			Ioc ioc = Mirror.me(ib.type()).born().create(config, ib.args());
-			log.debug(ioc);
+			config.getGameContext().setAttribute(RkMvcContext.GAME_IOC_KEY, ioc);
 		} else if (log.isInfoEnabled())
 			log.info("!!!Your application without @IocBy supporting");
 	}
@@ -108,7 +109,7 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			if (log.isDebugEnabled())
 				log.debugf("Localization message: '%s'", lc.value());
 			Map<String, Map<String, Object>> msgss = Mirror.me(lc.type()).born().load(lc.value());
-			config.getGameContext().setAttribute("config", msgss.get(Mvcs.DEFAULT_MSGS));
+			config.getGameContext().setAttribute(RkMvcContext.GAME_CONFIG_KEY, msgss.get(Mvcs.DEFAULT_MSGS));
 		} else if (log.isDebugEnabled()) {
 			log.debug("!!!Can not find localization message resource");
 		}
