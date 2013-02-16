@@ -1,16 +1,9 @@
 package com.rekoe.loader.js;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.bsf.BSFManager;
-import org.nutz.lang.Lang;
-import org.nutz.lang.Streams;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
-import com.rekoe.loader.AbstractLoader;
+import com.rekoe.dial.BaiduBonus;
 
 /**
  * @author 科技㊣²º¹³
@@ -18,38 +11,27 @@ import com.rekoe.loader.AbstractLoader;
  * http://www.rekoe.com
  * QQ:5382211
  */
-public class TaskLoader extends AbstractLoader {
+public class TaskLoader extends AbstractJsLoader {
 
 	private final static Log log = Logs.get();
-	private Map<String,Object> tasks = new HashMap<String,Object>();
+	
 	public TaskLoader(String ...fileNames)
 	{
+		init();
 		loader(fileNames);
 	}
-	@Override
-	public void clear() {
-
-	}
-
-	@Override
-	protected String getScanPatten() {
-		return ".+[.]js$";
-	}
-
-	@Override
-	public void add(String name, InputStream ins) {
-		BSFManager context = new BSFManager();
-		try {
-		context.declareBean("tasks", this, TaskLoader.class);
-		String content = new String(Streams.readBytes(ins));
-		log.info(content);
-		context.exec("javascript", name, 0, 0, content);
-		} catch (Throwable e) {
-			throw Lang.wrapThrow(e);
-		}
-	}
+	
 	public static void main(String[] args) {
-		TaskLoader loader = new TaskLoader("e:/conf");
-		System.out.println(loader.tasks);
+		new TaskLoader("e:/conf");
+	}
+
+	public void add(BaiduBonus bonus){
+		log.info(bonus);
+	}
+	@Override
+	protected void init() {
+		super.classType = getClass();
+		super.obj = this;
+		super.name = "tasks";
 	}
 }
