@@ -1,5 +1,6 @@
 package com.rekoe.mvc.config;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import org.nutz.ioc.Ioc;
 
 import com.rekoe.mvc.GameContext;
@@ -43,4 +44,5 @@ public interface GameConfig {
 	
 	public Ioc getIoc();
 
+	//public Workbook getWorkbook(String name);
 }
