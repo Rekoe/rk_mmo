@@ -12,13 +12,12 @@ import org.nutz.lang.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
 import com.rekoe.mvc.annotation.CRUD;
 import com.rekoe.mvc.annotation.Cache;
 import com.rekoe.mvc.annotation.CacheNameSuffix;
-
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 /**
  * @author Conanca

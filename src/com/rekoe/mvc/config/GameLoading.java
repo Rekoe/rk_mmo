@@ -21,6 +21,7 @@ import org.nutz.mvc.annotation.Localization;
 
 import com.rekoe.mvc.IServer;
 import com.rekoe.mvc.RkMvcContext;
+import com.rekoe.mvc.annotation.GameResourceBy;
 import com.rekoe.mvc.annotation.IocGameBy;
 import com.rekoe.mvc.annotation.ServerStartBy;
 
@@ -63,6 +64,10 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			 * 处理环境设置
 			 */
 			createContext(config);
+			/*
+			 * 加载资源文件
+			 */
+			createResourceLoader(config, mainModule);
 			evalMainServerMonitor(config, mainModule);
 		}
 		catch (Exception e) {
@@ -102,6 +107,15 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			config.getGameContext().setAttribute(RkMvcContext.GAME_IOC_KEY, ioc);
 		} else if (log.isInfoEnabled())
 			log.info("!!!Your application without @IocBy supporting");
+	}
+	private void createResourceLoader(GameConfig config, Class<?> mainModule) throws Exception {
+		GameResourceBy ib = mainModule.getAnnotation(GameResourceBy.class);
+		if (null != ib) {
+			if (log.isDebugEnabled())
+				log.debugf("@GameResourceBy(%s)", ib.type().getName());
+			Mirror.me(ib.type()).born().loader(config, ib.args());
+		} else if (log.isInfoEnabled())
+			log.info("!!!Your application without @GameResourceBy supporting");
 	}
 	private void evalLocalization(GameConfig config, Class<?> mainModule) {
 		Localization lc = mainModule.getAnnotation(Localization.class);
