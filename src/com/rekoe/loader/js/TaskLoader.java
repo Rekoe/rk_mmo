@@ -34,4 +34,9 @@ public class TaskLoader extends AbstractJsLoader {
 		super.obj = this;
 		super.name = "tasks";
 	}
+
+	@Override
+	public <T> T getClassObject(String name) {
+		return null;
+	}
 }

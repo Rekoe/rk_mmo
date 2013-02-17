@@ -22,7 +22,10 @@ import com.rekoe.mvc.ioc.provider.ComboResourceGameProvider;
 @IocGameBy(type = ComboIocGameProvider.class, args = {
 		"*org.nutz.ioc.loader.json.JsonLoader", "ioc/",
 		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.rekoe.db" })
-@GameResourceBy(type=ComboResourceGameProvider.class,args={"*com.rekoe.loader.js.TaskLoader","baidu.js"})
+@GameResourceBy(type = ComboResourceGameProvider.class, args = {
+		"*com.rekoe.loader.js.TaskLoader", "baidu.js",
+		"*com.rekoe.loader.xls.XLSLoader", "e:/conf" ,
+		"*com.rekoe.loader.xlm.XMLLoader","e:/conf"})
 @ServerStartBy({PolicyServer.class,GameServer.class})
 public class MainModule {
 

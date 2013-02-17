@@ -20,6 +20,12 @@ public abstract class AbstractJsLoader extends AbstractLoader {
 	protected String name;
 	protected Class<?> classType;
 	protected Object obj;
+	
+	@Override
+	public String getResourceType() {
+		return "js";
+	}
+
 	@Override
 	public void clear() {
 

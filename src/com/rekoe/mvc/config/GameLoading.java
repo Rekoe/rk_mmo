@@ -20,6 +20,7 @@ import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.Localization;
 
 import com.rekoe.mvc.IServer;
+import com.rekoe.mvc.ResoutceGameProvider;
 import com.rekoe.mvc.RkMvcContext;
 import com.rekoe.mvc.annotation.GameResourceBy;
 import com.rekoe.mvc.annotation.IocGameBy;
@@ -32,7 +33,8 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 	public void load(GameConfig config) {
 		if (log.isInfoEnabled()) {
 			log.infof("Nutz Version : %s ", Nutz.version());
-			log.infof("Nutz.Mvc is initializing ...", "");
+			log.info("Nutz.Mvc is initializing ...");
+			log.infof("Commint %s", " https://github.com/Rekoe/rk_mmo.git");
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("Web Container Information:");
@@ -104,7 +106,7 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			if (log.isDebugEnabled())
 				log.debugf("@IocBy(%s)", ib.type().getName());
 			Ioc ioc = Mirror.me(ib.type()).born().create(config, ib.args());
-			config.getGameContext().setAttribute(RkMvcContext.GAME_IOC_KEY, ioc);
+			config.setAttributeIgnoreNull(RkMvcContext.GAME_IOC_KEY, ioc);
 		} else if (log.isInfoEnabled())
 			log.info("!!!Your application without @IocBy supporting");
 	}
@@ -113,7 +115,8 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 		if (null != ib) {
 			if (log.isDebugEnabled())
 				log.debugf("@GameResourceBy(%s)", ib.type().getName());
-			Mirror.me(ib.type()).born().loader(config, ib.args());
+			ResoutceGameProvider provider = Mirror.me(ib.type()).born().loader(config, ib.args());
+			config.setAttributeIgnoreNull(RkMvcContext.GAME_RESOURCE_KEY, provider);
 		} else if (log.isInfoEnabled())
 			log.info("!!!Your application without @GameResourceBy supporting");
 	}
@@ -123,7 +126,7 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			if (log.isDebugEnabled())
 				log.debugf("Localization message: '%s'", lc.value());
 			Map<String, Map<String, Object>> msgss = Mirror.me(lc.type()).born().load(lc.value());
-			config.getGameContext().setAttribute(RkMvcContext.GAME_CONFIG_KEY, msgss.get(Mvcs.DEFAULT_MSGS));
+			config.setAttributeIgnoreNull(RkMvcContext.GAME_CONFIG_KEY, msgss.get(Mvcs.DEFAULT_MSGS));
 		} else if (log.isDebugEnabled()) {
 			log.debug("!!!Can not find localization message resource");
 		}

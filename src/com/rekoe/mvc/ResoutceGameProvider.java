@@ -1,5 +1,9 @@
 package com.rekoe.mvc;
 
+import java.util.List;
+import java.util.Map;
+
+import com.rekoe.loader.ILoader;
 import com.rekoe.mvc.config.GameConfig;
 
 /**
@@ -10,5 +14,7 @@ import com.rekoe.mvc.config.GameConfig;
  */
 public interface ResoutceGameProvider {
 	
-	public void loader(GameConfig config, String[] args);
+	public ResoutceGameProvider loader(GameConfig config, String[] args);
+	
+	public Map<String,List<ILoader>> resourceList();
 }

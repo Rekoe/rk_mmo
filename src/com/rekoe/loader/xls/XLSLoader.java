@@ -28,7 +28,10 @@ public class XLSLoader extends AbstractLoader {
 	public XLSLoader(String... fileNames) {
 		loader(fileNames);
 	}
-
+	@Override
+	public String getResourceType() {
+		return "xls";
+	}
 	protected String getScanPatten() {
 		return ".+[.]xls";// ".+[.]xls$"
 	}
@@ -54,5 +57,11 @@ public class XLSLoader extends AbstractLoader {
 		} catch (Throwable e) {
 			throw Lang.wrapThrow(e);
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getClassObject(String name) {
+		return (T) xlsMap.get(name);
 	}
 }

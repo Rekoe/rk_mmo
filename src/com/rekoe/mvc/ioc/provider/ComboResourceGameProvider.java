@@ -24,6 +24,7 @@ import com.rekoe.mvc.config.GameConfig;
  */
 public class ComboResourceGameProvider implements ResoutceGameProvider {
 
+	private Map<String, List<ILoader>> iloaders = new HashMap<String, List<ILoader>>();
 	/**
 	 * 类别名
 	 */
@@ -35,7 +36,7 @@ public class ComboResourceGameProvider implements ResoutceGameProvider {
 	}
 
 	@Override
-	public void loader(GameConfig config, String[] args) {
+	public ResoutceGameProvider loader(GameConfig config, String[] args) {
 		try {
 			ArrayList<String> argsList = null;
 			String currentClassName = null;
@@ -53,6 +54,7 @@ public class ComboResourceGameProvider implements ResoutceGameProvider {
 		} catch (ClassNotFoundException e) {
 			throw Lang.wrapThrow(e);
 		}
+		return this;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -62,6 +64,19 @@ public class ComboResourceGameProvider implements ResoutceGameProvider {
 		if (klass == null){
 			klass = (Class<? extends ILoader>) Lang.loadClass(className);
 		}
-		Mirror.me(klass).born(args.toArray(new Object[args.size()]));
+		ILoader loader = Mirror.me(klass).born(args.toArray(new Object[args.size()]));
+		String key = loader.getResourceType();
+		List<ILoader> loaderList = iloaders.get(key);
+		if(Lang.isEmpty(loaderList))
+		{
+			loaderList = new ArrayList<ILoader>();
+			iloaders.put(key, loaderList);
+		}
+		loaderList.add(loader);
+	}
+
+	@Override
+	public Map<String, List<ILoader>> resourceList() {
+		return iloaders;
 	}
 }
