@@ -1,8 +1,10 @@
 package com.rekoe;
 
+import org.nutz.lang.Xmls;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import com.rekoe.mvc.RkMvcContext;
 import com.rekoe.mvc.config.FilterGameConfig;
@@ -26,8 +28,9 @@ public class Server {
 	public static void main(String[] args) {
 		FilterGameConfig config = new FilterGameConfig();
 		new GameActionHandler(config);
-		Document wk = RkMvcContext.me().getResourceAttributeAs(Document.class, "webInfo.xml");
-		log.info(wk);
+		Document doc = RkMvcContext.me().getResourceAttributeAs(Document.class, "pom.xml");
+		Element root = doc.getDocumentElement(); 
+		log.info("The root element is:" + Xmls.get(root, "name"));
 	}
 
 }
