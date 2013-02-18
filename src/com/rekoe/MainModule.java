@@ -23,7 +23,7 @@ import com.rekoe.mvc.ioc.provider.ComboResourceGameProvider;
 @SetupBy(Install.class)
 @IocGameBy(type = ComboIocGameProvider.class, args = {
 		"*org.nutz.ioc.loader.json.JsonLoader", "ioc/",
-		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.rekoe.ioc.db" })
+		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.rekoe.ioc" })
 @GameResourceBy(type = ComboResourceGameProvider.class, args = {
 		"*com.rekoe.loader.js.TaskLoader", "baidu.js",
 		"*com.rekoe.loader.xls.XLSLoader", "xls/" ,

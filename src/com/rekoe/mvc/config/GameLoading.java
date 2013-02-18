@@ -17,7 +17,6 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.LoadingException;
 import org.nutz.mvc.Mvcs;
-import org.nutz.mvc.Setup;
 import org.nutz.mvc.annotation.Localization;
 
 import com.rekoe.mvc.GameSetup;

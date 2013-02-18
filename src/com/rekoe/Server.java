@@ -28,6 +28,7 @@ public class Server {
 	public static void main(String[] args) {
 		FilterGameConfig config = new FilterGameConfig();
 		new GameActionHandler(config);
+		//测试代码 可删除
 		Document doc = RkMvcContext.me().getResourceAttributeAs(Document.class, "pom.xml");
 		Element root = doc.getDocumentElement(); 
 		log.info("The root element is:" + Xmls.get(root, "name"));

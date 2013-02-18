@@ -74,4 +74,8 @@ public class RkMvcContext extends SimpleContext {
 		}
 		throw new NullPointerException(String.format("%s is not load", resType));
 	}
+
+	public GameConfig getConfig() {
+		return config;
+	}
 }

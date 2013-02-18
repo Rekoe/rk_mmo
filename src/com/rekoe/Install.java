@@ -3,6 +3,7 @@ package com.rekoe;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
+import com.rekoe.ioc.resource.RegisterResource;
 import com.rekoe.mvc.GameSetup;
 import com.rekoe.mvc.config.GameConfig;
 
@@ -18,11 +19,15 @@ public class Install implements GameSetup {
 	@Override
 	public void initResource(GameConfig config) {
 		log.info("load Resource");
+		RegisterResource reg = config.getIoc().get(RegisterResource.class);
+		reg.load();
 	}
 
 	@Override
 	public void checkResource(GameConfig config) {
 		log.info("check Resource");
+		RegisterResource reg = config.getIoc().get(RegisterResource.class);
+		reg.check();
 	}
 
 
