@@ -1,5 +1,4 @@
 var ioc = {
-
 	dataSource : {
 		type : "com.alibaba.druid.pool.DruidDataSource",
 		events : {
@@ -7,9 +6,10 @@ var ioc = {
 		},
 		fields : {
 			// 请修改下面的数据库连接信息
-			url : 'jdbc:h2:~/nutzdemo-rediscache/db/db;CACHE_SIZE=131072;AUTO_RECONNECT=TRUE',
-			username : 'sa',
-			password : '',
+			url :{java : '$conf.get("db_url")'},
+			username : {java : '$conf.get("db_user")'},
+			password : {java : '$conf.get("db_passwd")'},
+			filters : "stat",
 			maxActive : 20,
 			validationQuery : "SELECT 'x'",
 			testWhileIdle : true,

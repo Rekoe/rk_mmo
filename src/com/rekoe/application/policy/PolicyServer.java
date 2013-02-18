@@ -61,7 +61,7 @@ public class PolicyServer extends SimpleChannelUpstreamHandler  implements IServ
 		bootstrap.bind(new InetSocketAddress(PORT));
 		context.setAttribute("BOOT_STRAP_POLICY", bootstrap);
 		if (log.isInfoEnabled())
-			log.infof("Server Start application Monitor at  Port %s" ,PORT);
+			log.infof("Flash Server Start application Monitor at  Port %s" ,PORT);
 	}
 	@Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {

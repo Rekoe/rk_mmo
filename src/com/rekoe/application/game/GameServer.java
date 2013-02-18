@@ -146,7 +146,7 @@ public class GameServer extends SimpleChannelUpstreamHandler implements IServer{
 		bootstrap.bind(new InetSocketAddress(port));
 		context.setAttribute("BOOT_STRAP", bootstrap);
 		if (log.isInfoEnabled())
-			log.infof("Server Start application Monitor at  Port %s" ,port);
+			log.infof("Game Server Start application Monitor at  Port %s" ,port);
 	}
 	
 	private void startMonitorThread() {

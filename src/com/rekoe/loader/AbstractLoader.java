@@ -32,7 +32,7 @@ public abstract class AbstractLoader implements ILoader {
 				Streams.safeClose(ins);
 			}
 			if (LOG.isDebugEnabled())
-				LOG.debugf("Load complete :\n%s");
+				LOG.debugf("Load complete : %s",Lang.array2list(fileNames));
 		} catch (Throwable e) {
 			throw Lang.wrapThrow(e);
 		}

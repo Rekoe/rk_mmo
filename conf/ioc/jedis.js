@@ -1,5 +1,4 @@
 var ioc = {
-
 	jedisPoolConfig : {
 		type : 'redis.clients.jedis.JedisPoolConfig',
 		fields : {
