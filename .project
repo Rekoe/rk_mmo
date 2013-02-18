@@ -19,5 +19,7 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+		<nature>com.aptana.ide.project.remote.nature</nature>
+		<nature>com.aptana.ide.project.nature.web</nature>
 	</natures>
 </projectDescription>
