@@ -18,7 +18,6 @@ import com.rekoe.mvc.config.GameActionHandler;
  */
 public class Server {
 
-
 	private final static Log log = Logs.get();
 	/**
 	 * @param args
