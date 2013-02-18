@@ -25,7 +25,12 @@ import com.rekoe.mvc.RkMvcContext;
 import com.rekoe.mvc.annotation.GameResourceBy;
 import com.rekoe.mvc.annotation.IocGameBy;
 import com.rekoe.mvc.annotation.ServerStartBy;
-
+/**
+ * @author 科技㊣²º¹³
+ * Feb 16, 2013 2:35:33 PM
+ * http://www.rekoe.com
+ * QQ:5382211
+ */
 public class GameLoading implements com.rekoe.mvc.Loading{
 
 	private static final Log log = Logs.get();

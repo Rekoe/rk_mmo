@@ -2,7 +2,12 @@ package com.rekoe.msg;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-
+/**
+ * @author 科技㊣²º¹³
+ * Feb 16, 2013 2:35:33 PM
+ * http://www.rekoe.com
+ * QQ:5382211
+ */
 public class FieldFormat {
 
 	public static final int TYPE_UNKNOWN = 0;

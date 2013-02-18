@@ -7,7 +7,12 @@ import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.oneone.OneToOneEncoder;
 
 import com.rekoe.msg.BaseIoMessage;
-
+/**
+ * @author 科技㊣²º¹³
+ * Feb 16, 2013 2:35:33 PM
+ * http://www.rekoe.com
+ * QQ:5382211
+ */
 public class GameMessageEncoder extends OneToOneEncoder {
 
 	@Override

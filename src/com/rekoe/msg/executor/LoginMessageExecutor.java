@@ -9,7 +9,12 @@ import com.rekoe.msg.BaseStateMessageExecutor;
 import com.rekoe.msg.IMessage;
 import com.rekoe.msg.MessageTypeState;
 import com.rekoe.msg.cs.CSLoginMessage;
-
+/**
+ * @author 科技㊣²º¹³
+ * Feb 16, 2013 2:35:33 PM
+ * http://www.rekoe.com
+ * QQ:5382211
+ */
 public class LoginMessageExecutor extends BaseStateMessageExecutor<Client> {
 	private Log log = Logs.get();
 	private final static Short[] preposingStates = new Short[] {MessageTypeState.CONNECTED};

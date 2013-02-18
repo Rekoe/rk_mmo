@@ -34,6 +34,12 @@ import com.rekoe.msg.executor.LoginMessageExecutor;
 import com.rekoe.mvc.GameContext;
 import com.rekoe.mvc.IServer;
 import com.rekoe.mvc.config.GameConfig;
+/**
+ * @author 科技㊣²º¹³
+ * Feb 16, 2013 2:35:33 PM
+ * http://www.rekoe.com
+ * QQ:5382211
+ */
 @SuppressWarnings({"rawtypes"})
 public class GameServer extends SimpleChannelUpstreamHandler implements IServer{
 	public static final String PLAYER_KEY = "PLAYER";

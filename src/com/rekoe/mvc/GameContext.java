@@ -2,7 +2,12 @@ package com.rekoe.mvc;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author 科技㊣²º¹³
+ * Feb 16, 2013 2:35:33 PM
+ * http://www.rekoe.com
+ * QQ:5382211
+ */
 public class GameContext {
 
 	private Map<String,Object> map = new HashMap<String,Object>();
