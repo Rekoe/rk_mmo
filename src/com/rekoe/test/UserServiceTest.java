@@ -18,8 +18,8 @@ import org.nutz.log.Logs;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import com.rekoe.db.domain.User;
-import com.rekoe.db.service.UserService;
+import com.rekoe.ioc.db.domain.User;
+import com.rekoe.ioc.db.service.UserService;
 /**
  * @author 科技㊣²º¹³
  * Feb 16, 2013 2:35:33 PM

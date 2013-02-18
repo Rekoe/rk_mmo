@@ -1,4 +1,4 @@
-package com.rekoe.db;
+package com.rekoe.ioc.db;
 
 import org.nutz.ioc.loader.annotation.IocBean;
 

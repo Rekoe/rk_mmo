@@ -17,8 +17,10 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.LoadingException;
 import org.nutz.mvc.Mvcs;
+import org.nutz.mvc.Setup;
 import org.nutz.mvc.annotation.Localization;
 
+import com.rekoe.mvc.GameSetup;
 import com.rekoe.mvc.IServer;
 import com.rekoe.mvc.ResoutceGameProvider;
 import com.rekoe.mvc.RkMvcContext;
@@ -71,10 +73,15 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 			 * 处理环境设置
 			 */
 			createContext(config);
+			
 			/*
 			 * 加载资源文件
 			 */
 			createResourceLoader(config, mainModule);
+			/*
+			 * 资源文件转换为GameBean
+			 */
+			evalSetup(config, mainModule);
 			evalMainServerMonitor(config, mainModule);
 		}
 		catch (Exception e) {
@@ -88,7 +95,17 @@ public class GameLoading implements com.rekoe.mvc.Loading{
 		if (log.isInfoEnabled())
 			log.infof("RK_MMO[%s] is up in %sms", "1.0", sw.getDuration());
 	}
-	
+    private void evalSetup(GameConfig config, Class<?> mainModule) throws Exception {
+        com.rekoe.mvc.SetupBy sb = mainModule.getAnnotation(com.rekoe.mvc.SetupBy.class);
+        if (null != sb) {
+            if (log.isInfoEnabled())
+                log.info("Setup application...");
+           GameSetup setup = Mirror.me(sb.value()).born((Object[]) sb.args());
+           config.setAttributeIgnoreNull(GameSetup.class.getName(), setup);
+           setup.initResource(config);
+           setup.checkResource(config);
+        }
+    }
 	private void evalMainServerMonitor(GameConfig config, Class<?> mainModule) throws Exception 
 	{
 		ServerStartBy sb = mainModule.getAnnotation(ServerStartBy.class);

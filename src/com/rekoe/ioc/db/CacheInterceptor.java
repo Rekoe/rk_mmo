@@ -1,4 +1,4 @@
-package com.rekoe.db;
+package com.rekoe.ioc.db;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

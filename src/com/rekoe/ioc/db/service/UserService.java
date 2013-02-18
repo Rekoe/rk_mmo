@@ -1,4 +1,4 @@
-package com.rekoe.db.service;
+package com.rekoe.ioc.db.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.nutz.ioc.aop.Aop;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.service.IdEntityService;
 
-import com.rekoe.db.domain.User;
+import com.rekoe.ioc.db.domain.User;
 import com.rekoe.mvc.annotation.CRUD;
 import com.rekoe.mvc.annotation.Cache;
 import com.rekoe.mvc.annotation.CacheNameSuffix;

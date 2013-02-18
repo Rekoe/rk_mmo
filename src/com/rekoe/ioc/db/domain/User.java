@@ -1,4 +1,4 @@
-package com.rekoe.db.domain;
+package com.rekoe.ioc.db.domain;
 
 import org.nutz.dao.entity.annotation.ColDefine;
 import org.nutz.dao.entity.annotation.ColType;
