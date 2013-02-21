@@ -1,12 +1,12 @@
 package com.rekoe;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.nutz.dao.Dao;
 import org.nutz.dao.impl.FileSqlManager;
 import org.nutz.dao.sql.Sql;
 import org.nutz.ioc.Ioc;
+import org.nutz.json.Json;
 import org.nutz.lang.Lang;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
@@ -15,6 +15,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import com.rekoe.ioc.db.domain.User;
+import com.rekoe.ioc.db.service.UserService;
 import com.rekoe.ioc.resource.RegisterResource;
 import com.rekoe.mvc.GameSetup;
 import com.rekoe.mvc.config.GameConfig;
@@ -62,7 +63,7 @@ public class Install implements GameSetup {
 		log.debug("初始化数据库...");
 		Dao dao = ioc.get(Dao.class, "dao");
 		boolean exists = dao.exists(User.class);
-		if(exists)
+		if(!exists)
 		{
 			dao.create(User.class, true);
 			FileSqlManager fm = new FileSqlManager("init_system_h2.sql");
@@ -76,5 +77,6 @@ public class Install implements GameSetup {
 			jedis.flushDB();
 			pool.returnResource(jedis);
 		}
+		log.info(Json.toJson(ioc.get(UserService.class).view(2)));
 	}
 }
