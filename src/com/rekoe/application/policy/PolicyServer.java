@@ -35,6 +35,7 @@ import com.rekoe.mvc.config.GameConfig;
  * http://www.rekoe.com
  * QQ:5382211
  */
+
 public class PolicyServer extends SimpleChannelUpstreamHandler  implements IServer {
 
 	private Log log = Logs.get();
@@ -70,7 +71,7 @@ public class PolicyServer extends SimpleChannelUpstreamHandler  implements IServ
     }
 
     private ChannelBuffer getPolicyFileContents() throws Exception {
-        return ChannelBuffers.copiedBuffer(FLASH_POLICY_STR.toString()+ NEWLINE,CharsetUtil.US_ASCII);
+        return ChannelBuffers.copiedBuffer(FLASH_POLICY_STR.toString()+ NEWLINE,CharsetUtil.UTF_8);
     }
 
     @Override
@@ -87,6 +88,10 @@ public class PolicyServer extends SimpleChannelUpstreamHandler  implements IServ
 	@Override
 	public void initMessageExecutor() {
 		FLASH_POLICY_STR.append(Files.read(FLASH_POLICY_FILE));
+	}
+	@Override
+	public void stopServer() throws Exception {
+		
 	}
 
 }

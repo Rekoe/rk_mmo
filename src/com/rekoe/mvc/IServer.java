@@ -12,4 +12,5 @@ import com.rekoe.mvc.config.GameConfig;
 public interface IServer extends ChannelHandler{
 	public abstract void initMessageExecutor();
 	public void connect(GameConfig config);
+	public void stopServer() throws Exception;
 }

@@ -16,6 +16,9 @@ import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.jboss.netty.channel.group.ChannelGroup;
+import org.jboss.netty.channel.group.ChannelGroupFuture;
+import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.nutz.lang.Lang;
 import org.nutz.log.Log;
@@ -42,6 +45,7 @@ import com.rekoe.mvc.config.GameConfig;
  */
 @SuppressWarnings({"rawtypes"})
 public class GameServer extends SimpleChannelUpstreamHandler implements IServer{
+	public static final ChannelGroup ALL_CHANNELS = new DefaultChannelGroup("JETSERVER-CHANNELS");
 	public static final String PLAYER_KEY = "PLAYER";
 	private Log log = Logs.get();
 	private MessageQueueExecutor queueExecutor;
@@ -58,6 +62,7 @@ public class GameServer extends SimpleChannelUpstreamHandler implements IServer{
 	@Override
 	public void channelOpen(ChannelHandlerContext ctx, ChannelStateEvent e)
 			throws Exception {
+		ALL_CHANNELS.add(e.getChannel());
 		super.channelOpen(ctx, e);
 		log.infof("Method %s ","channelOpen");
 	}
@@ -140,7 +145,7 @@ public class GameServer extends SimpleChannelUpstreamHandler implements IServer{
 //				pipeline.addLast("executionHandler",executionHandler);
 //				pipeline.addLast("handler", MainServerStart.this);
 //				return pipeline;
-				return Channels.pipeline(decoder, encoder/**,executionHandler**/,GameServer.this);
+				return Channels.pipeline(decoder, encoder,new IdleCheckHandler(),GameServer.this);
 			}
 		});
 		bootstrap.bind(new InetSocketAddress(port));
@@ -162,4 +167,16 @@ public class GameServer extends SimpleChannelUpstreamHandler implements IServer{
 			}
 		}, 0, 2, TimeUnit.SECONDS);
 	}
+	
+	public void stopServer() throws Exception
+	{
+		log.debugf("In stopServer method of class: %s",this.getClass().getName());
+		ChannelGroupFuture future = ALL_CHANNELS.close();
+		try {
+			future.await();
+		} catch (InterruptedException e) {
+			log.error("Execption occurred while waiting for channels to close: {}",e);
+		}
+	}
+	
 }
